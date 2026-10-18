@@ -1,0 +1,633 @@
+﻿@model QUANLYBANHANG_MVC.Models.TrangchuViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="@Url.Content("~/Content/style.css")" />
+
+    <script type="text/javascript"
+            src="@Url.Content("~/Scripts/boxOver.js")">
+    </script>
+    <style>
+        /* ========== HAI CỘT BÊN ========== */
+
+        #main_container .left_content,
+        #main_container .right_content {
+            width: 196px;
+            box-sizing: border-box;
+        }
+
+            /* Thanh tiêu đề và khung có cùng độ rộng với cột */
+            #main_container .left_content .title_box,
+            #main_container .right_content .title_box,
+            #main_container .left_content .border_box,
+            #main_container .right_content .border_box {
+                width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+                box-sizing: border-box;
+            }
+
+            /* Giữ ảnh nền tiêu đề phủ hết thanh */
+            #main_container .left_content .title_box,
+            #main_container .right_content .title_box {
+                background-size: 100% 100%;
+            }
+
+            /* Categories và Manufacturers */
+            #main_container .left_content ul.left_menu,
+            #main_container .right_content ul.left_menu {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                box-sizing: border-box;
+            }
+
+        #main_container ul.left_menu > li {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+            /* Ghi đè trực tiếp các link odd/even trong style.css */
+            #main_container ul.left_menu > li.odd > a,
+            #main_container ul.left_menu > li.even > a {
+                display: block;
+                width: 100%;
+                height: 25px;
+                margin: 0;
+                padding: 0 0 0 30px;
+                line-height: 25px;
+                box-sizing: border-box;
+            }
+
+        #main_container .left_content .banner_adds,
+        #main_container .right_content .banner_adds {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* ========== VÙNG SẢN PHẨM ========== */
+
+        #main_container .center_content.home-products {
+            width: 605px;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            column-gap: 3px;
+            row-gap: 10px;
+        }
+
+        /* Tiêu đề chiếm một hàng riêng */
+        #main_container .home-products > .center_title_bar {
+            float: none;
+            flex: 0 0 100%;
+            width: 100%;
+            margin: 0 0 5px;
+            box-sizing: border-box;
+        }
+
+        /* 3 ô x 193px + 2 khoảng cách x 3px = 585px */
+        #main_container .home-products > .prod_box {
+            float: none;
+            flex: 0 0 193px;
+            width: 193px;
+            padding: 10px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+        <div id="main_container">
+            <!-- ================= TOP BAR ================= -->
+            <div class="top_bar">
+                <div class="top_search">
+                    <div class="search_text"> <a href="#">Advanced Search</a> </div>
+                    <input type="text" class="search_input" name="search" />
+                    <input type="image"
+                           src="@Url.Content("~/images/search.gif")"
+                           class="search_bt" />
+                </div>
+
+                <div class="languages">
+                    <div class="lang_text">Languages:</div>
+                    <a href="#" class="lang">
+                        <img src="@Url.Content("~/images/en.gif")" alt="" border="0" />
+                    </a>
+                    <a href="#" class="lang">
+                        <img src="@Url.Content("~/images/de.gif")" alt="" border="0" />
+                    </a>
+                </div>
+            </div>
+
+            <!-- ================= HEADER ================= -->
+            <div id="header"
+                 style="width: 1000px;
+            height: 173px;
+            margin: auto;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: flex-start;
+            box-sizing: border-box;
+            background: url('@Url.Content("~/images/header_bg.jpg")') no-repeat 0 0;">
+
+                <!-- LOGO -->
+                <div id="logo"
+                     style="float: none;
+                flex: 0 0 267px;
+                padding: 15px;
+                box-sizing: border-box;">
+
+                    <a href="@Url.Action("Index", "Trangchu")">
+                        <img src="@Url.Content("~/images/logo.png")"
+                             alt="Logo"
+                             border="0"
+                             width="237"
+                             height="140"
+                             style="display: block;
+                        width: 237px;
+                        height: 140px;" />
+                    </a>
+                </div>
+
+                <!-- KHỐI QUẢNG CÁO -->
+                <div class="oferte_content"
+                     style="float: none;
+                flex: 0 0 600px;
+                width: 600px;
+                height: 164px;
+                padding: 0 0 0 50px;
+                display: flex;
+                align-items: flex-start;
+                box-sizing: border-box;">
+
+                    <!-- ĐƯỜNG PHÂN CÁCH BÊN TRÁI -->
+                    <div class="top_divider"
+                         style="float: none;
+                    flex: 0 0 1px;
+                    width: 1px;
+                    height: 164px;">
+
+                        <img src="@Url.Content("~/images/header_divider.png")"
+                             alt=""
+                             width="1"
+                             height="164"
+                             style="display: block;" />
+                    </div>
+
+                    <div class="oferta"
+                         style="float: none;
+                    flex: 0 0 538px;
+                    width: 538px;
+                    height: 164px;
+                    padding: 15px 30px 0;
+                    box-sizing: border-box;">
+
+                        <!-- HÀNG TRÊN: ẢNH BÊN TRÁI, CHỮ BÊN PHẢI -->
+                        <div class="oferta_content"
+                             style="display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        align-items: flex-start;
+                        gap: 15px;
+                        width: 100%;
+                        height: 105px;
+                        margin: 0;
+                        padding: 0;
+                        overflow: visible;
+                        box-sizing: border-box;">
+
+                            <img src="@Url.Content("~/images/laptop.png")"
+                                 width="94"
+                                 height="92"
+                                 alt="Laptop"
+                                 border="0"
+                                 class="oferta_img"
+                                 style="display: block;
+                            float: none;
+                            flex: 0 0 94px;
+                            width: 94px;
+                            height: 92px;
+                            margin: 0;
+                            padding: 0;
+                            object-fit: contain;" />
+
+                            <div class="oferta_details"
+                                 style="float: none;
+                            flex: 1 1 0;
+                            min-width: 0;
+                            width: auto;
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;">
+
+                                <div class="oferta_title"
+                                     style="font-size: 15px;
+                                line-height: 18px;
+                                color: #b72c24;
+                                font-weight: bold;">
+                                    Samsung GX 2004 LM
+                                </div>
+
+                                <div class="oferta_text"
+                                     style="padding: 5px 0;
+                                font-size: 12px;
+                                line-height: 15px;
+                                color: #fff;
+                                text-align: justify;">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </div>
+
+                                <a href="#"
+                                   class="details"
+                                   style="display: block;
+                              float: none;
+                              width: 83px;
+                              height: 21px;
+                              margin: 5px 0 0 auto;
+                              padding: 0 0 0 5px;
+                              background: url('@Url.Content("~/images/details_bt_bg.gif")') no-repeat center;
+                              text-align: center;
+                              line-height: 21px;
+                              text-decoration: none;
+                              color: #000;
+                              box-sizing: border-box;">
+                                    details
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- HÀNG DƯỚI: PHÂN TRANG NẰM TRONG HEADER -->
+                        <div class="oferta_pagination"
+                             style="display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                        gap: 3px;
+                        float: none;
+                        clear: none;
+                        width: 100%;
+                        height: 24px;
+                        margin: 6px 0 0;
+                        padding: 0;
+                        text-align: left;
+                        box-sizing: border-box;">
+
+                            <span class="current"
+                                  style="display: block; float: none; flex: 0 0 25px;
+                             width: 22px; height: 22px; margin: 0; padding: 0;
+                             line-height: 22px; text-align: center; font-size: 10px;">
+                                1
+                            </span>
+
+                            <a href="#"
+                               style="display: block; float: none; flex: 0 0 25px;
+                          width: 22px; height: 22px; margin: 0; padding: 0;
+                          line-height: 22px; text-align: center; font-size: 10px;">
+                                2
+                            </a>
+
+                            <a href="#"
+                               style="display: block; float: none; flex: 0 0 25px;
+                          width: 22px; height: 22px; margin: 0; padding: 0;
+                          line-height: 22px; text-align: center; font-size: 10px;">
+                                3
+                            </a>
+
+                            <a href="#"
+                               style="display: block; float: none; flex: 0 0 25px;
+                          width: 22px; height: 22px; margin: 0; padding: 0;
+                          line-height: 22px; text-align: center; font-size: 10px;">
+                                4
+                            </a>
+
+                            <a href="#"
+                               style="display: block; float: none; flex: 0 0 25px;
+                          width: 22px; height: 22px; margin: 0; padding: 0;
+                          line-height: 22px; text-align: center; font-size: 10px;">
+                                5
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ĐƯỜNG PHÂN CÁCH BÊN PHẢI -->
+                    <div class="top_divider"
+                         style="float: none;
+                    flex: 0 0 1px;
+                    width: 1px;
+                    height: 164px;">
+
+                        <img src="@Url.Content("~/images/header_divider.png")"
+                             alt=""
+                             width="1"
+                             height="164"
+                             style="display: block;" />
+                    </div>
+                </div>
+            </div>
+            <!-- ================= MAIN CONTENT ================= -->
+
+            <div id="main_content">
+                <!-- ================= MENU ================= -->
+                <div id="menu_tab">
+                    <div class="left_menu_corner"></div>
+                    <ul class="menu">
+                        <li><a href="@Url.Action("Index", "Trangchu")" class="nav1">  Home  </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="nav2"> Products </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="nav3"> Specials </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="nav4"> My account </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="nav4"> Sign Up </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="nav5"> Shipping </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="nav6"> Contact Us </a></li>
+                        <li class="divider"></li>
+
+                        <li class="currencies">
+                            Currencies
+                            <select>
+                                <option>US Dollar</option>
+                                <option>Euro</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <div class="right_menu_corner"></div>
+                </div>
+
+                <!-- ================= BREADCRUMB ================= -->
+
+                <div class="crumb_navigation">
+                    Navigation: <span class="current"> Home </span>
+                </div>
+
+                <!-- ================= LEFT CONTENT ================= -->
+
+                <div class="left_content">
+                    <div class="title_box"> Categories </div> <!-- CATEGORIES -->
+                    <ul class="left_menu">
+                        @{
+                            int demDanhMuc = 0;
+                        }
+
+                        @if (Model != null && Model.DanhMuc != null)
+                        {
+                            foreach (var item in Model.DanhMuc)
+                            {
+                                demDanhMuc++;
+
+                                string className = demDanhMuc % 2 == 1
+                                    ? "odd"
+                                    : "even";
+
+                                <li class="@className">
+                                    <a href="#">@item.TENDANHMUC</a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="odd">
+                                <span>Chưa nhận được dữ liệu danh mục.</span>
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="title_box"> Special Products </div> <!-- SPECIAL PRODUCTS -->
+                    <div class="border_box">
+                        <div class="product_title">
+                            <a href="#"> Motorola 156 MX-VL </a>
+                        </div>
+                        <div class="product_img">
+                            <a href="#">
+                                <img src="@Url.Content("~/images/laptop.png")" alt="" border="0" />
+                            </a>
+                        </div>
+                        <div class="prod_price">
+                            <span class="reduce"> 350$ </span>
+                            <span class="price">  270$ </span>
+                        </div>
+                    </div>
+
+                    <div class="title_box"> Newsletter </div> <!-- NEWSLETTER -->
+                    <div class="border_box">
+                        <input type="text"
+                               name="newsletter"
+                               class="newsletter_input"
+                               value="your email" />
+                        <a href="#" class="join"> join </a>
+                    </div>
+
+                    <div class="banner_adds">
+                        <a href="#">
+                            <img src="@Url.Content("~/images/bann2.jpg")" alt="" border="0" />
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ================= CENTER CONTENT ================= -->
+
+                <div class="center_content home-products">
+                    <div class="center_title_bar">Latest Products</div>
+
+                    <div class="products-grid">
+                        @foreach (var item in Model.SanPham)
+                        {
+                            var detailsUrl = Url.Action(
+                                "Details",
+                                "Trangchu",
+                                new { id = item.MASANPHAM }
+                            );
+
+                            <div class="prod_box">
+                                <div class="top_prod_box"></div>
+
+                                <div class="center_prod_box">
+
+                                    <!-- TÊN SẢN PHẨM -->
+                                    <div class="product_title">
+                                        <a href="@detailsUrl">
+                                            @item.TENSANPHAM
+                                        </a>
+                                    </div>
+
+                                    <!-- ẢNH SẢN PHẨM -->
+                                    <div class="product_img">
+                                        <a href="@detailsUrl">
+                                            <img src="@Url.Content("~/images/" + item.HINHANH)"
+                                                 alt="@item.TENSANPHAM" />
+                                        </a>
+                                    </div>
+
+                                    <!-- GIÁ SẢN PHẨM -->
+                                    <div class="prod_price">
+                                        <span class="price">
+                                            @item.DONGIA $
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="bottom_prod_box"></div>
+
+                                <!-- CÁC NÚT SẢN PHẨM -->
+                                <div class="prod_details_tab">
+
+                                    @using (Html.BeginForm(
+                                        "ThemVaoGio",
+                                        "GioHang",
+                                        FormMethod.Post,
+                                        new
+                                        {
+                                            style = "float:left; margin:0; padding:0;"
+                                        }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@item.MASANPHAM" />
+
+                                        <input type="hidden"
+                                               name="soLuong"
+                                               value="1" />
+
+                                        <button type="submit"
+                                                title="Thêm vào giỏ hàng"
+                                                aria-label="Thêm vào giỏ hàng"
+                                                style="display:block;
+                                       border:none;
+                                       background:transparent;
+                                       padding:6px 0 0 6px;
+                                       margin:0;
+                                       cursor:pointer;">
+                                            <img src="@Url.Content("~/images/cart.gif")"
+                                                 alt=""
+                                                 style="display:block; border:0;" />
+                                        </button>
+                                    }
+
+                                    <a href="#"
+                                       title="header=[Specials] body=[&nbsp;] fade=[on]">
+                                        <img src="@Url.Content("~/images/favs.gif")"
+                                             alt="Specials"
+                                             border="0"
+                                             class="left_bt" />
+                                    </a>
+
+                                    <a href="#"
+                                       title="header=[Gifts] body=[&nbsp;] fade=[on]">
+                                        <img src="@Url.Content("~/images/favorites.gif")"
+                                             alt="Gifts"
+                                             border="0"
+                                             class="left_bt" />
+                                    </a>
+
+                                    <a href="@detailsUrl" class="prod_details">
+                                        details
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- ================= RIGHT CONTENT ================= -->
+                <div class="right_content">
+                    <!-- SHOPPING CART -->
+                    <div class="shopping_cart">
+                        <div class="cart_title"> Shopping cart </div>
+                        <div class="cart_details">
+                            0 items
+                            <span class="border_cart"></span>
+                            Total:
+                            <span class="price"> 0$ </span>
+                        </div>
+                        <div class="cart_icon">
+                            <a href="#"
+                               title="header=[Checkout] body=[&nbsp;] fade=[on]">
+                                <img src="@Url.Content("~/images/shoppingcart.png")"
+                                     alt="Shopping cart" width="48" height="48" border="0" />
+                            </a>
+                        </div>
+                    </div>
+                    <!-- WHAT'S NEW -->
+                    <div class="title_box">  What's new </div>
+                    <div class="border_box">
+                        <div class="product_title">
+                            <a href="#"> Motorola 156 MX-VL  </a>
+                        </div>
+                        <div class="product_img">
+                            <a href="#"><img src="@Url.Content("~/images/p2.gif")" alt="" border="0" /> </a>
+                        </div>
+                        <div class="prod_price">
+                            <span class="reduce">  350$  </span>
+                            <span class="price">  270$ </span>
+                        </div>
+                    </div>
+                    <!-- MANUFACTURERS -->
+                    <div class="title_box"> Manufacturers </div>
+                    <ul class="left_menu">
+                        <li class="odd">   <a href="#">Sony</a>     </li>
+                        <li class="even">  <a href="#">Samsung</a>  </li>
+                        <li class="odd">  <a href="#">Daewoo</a>  </li>
+                        <li class="even">  <a href="#">LG</a>  </li>
+                        <li class="odd">  <a href="#">Fujitsu Siemens</a> </li>
+                        <li class="even"> <a href="#">Motorola</a> </li>
+                        <li class="odd">   <a href="#">Phillips</a> </li>
+                        <li class="even">  <a href="#">Beko</a> </li>
+                    </ul>
+
+                    <div class="banner_adds">
+                        <a href="#">
+                            <img src="@Url.Content("~/images/bann1.jpg")" alt="" border="0" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= FOOTER ================= -->
+            <div class="footer">
+                <div class="left_footer">
+                    <img src="@Url.Content("~/images/footer_logo.png")" alt="" width="170" height="49" />
+                </div>
+                <div class="center_footer">
+                    Template name.
+                    All Rights Reserved 2008
+                    <br />
+                    <a href="#">
+                        <img src="@Url.Content("~/images/csscreme.jpg")" alt="csscreme" border="0" />
+                    </a>
+                    <br />
+                    <img src="@Url.Content("~/images/payment.gif")" alt="" />
+                </div>
+                <div class="right_footer">
+                    <a href="@Url.Action("Index", "Trangchu")"> home </a>
+                    <a href="#">   about          </a>
+                    <a href="#">   sitemap       </a>
+                    <a href="#">   rss   </a>
+                    <a href="#">   contact us      </a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
