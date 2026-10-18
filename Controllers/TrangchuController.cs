@@ -16,7 +16,7 @@ namespace QUANLYBANHANG_MVC.Controllers
             var model = new TrangchuViewModel
             {
                 DanhMuc = db.tbDANHMUCs.ToList(),
-                SanPham = db.tbSANPHAMs.ToList()
+                SanPham = db.tbSANPHAMs.OrderByDescending(x => x.MASANPHAM).ToList()
             };
 
             return View(model);

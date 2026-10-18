@@ -135,6 +135,7 @@
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QUANLYDANHMUCController.cs" />
+    <Compile Include="Controllers\QUANLYSANPHAMController.cs" />
     <Compile Include="Controllers\TrangchuController.cs" />
     <Compile Include="DataBaseModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -171,6 +172,8 @@
     </Compile>
     <Compile Include="Models\CART.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\SanPhamCreateViewModel.cs" />
+    <Compile Include="Models\SanPhamEditViewModel.cs" />
     <Compile Include="Models\TrangchuViewModel.cs" />
     <Compile Include="PARTY.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
@@ -344,6 +347,11 @@
     <Content Include="Views\QUANLYDANHMUC\Details.cshtml" />
     <Content Include="Views\QUANLYDANHMUC\Edit.cshtml" />
     <Content Include="Views\QUANLYDANHMUC\Index.cshtml" />
+    <Content Include="Views\QUANLYSANPHAM\Create.cshtml" />
+    <Content Include="Views\QUANLYSANPHAM\Index.cshtml" />
+    <Content Include="Views\QUANLYSANPHAM\Details.cshtml" />
+    <Content Include="Views\QUANLYSANPHAM\Edit.cshtml" />
+    <Content Include="Views\QUANLYSANPHAM\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,119 @@
+﻿@model System.Collections.Generic.IEnumerable<QUANLYBANHANG_MVC.tbSANPHAM>
+
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+}
+
+<h2>Quản lý sản phẩm</h2>
+
+@if (TempData["ThongBao"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["ThongBao"]
+    </div>
+}
+
+<p>
+    @Html.ActionLink(
+        "Thêm sản phẩm mới",
+        "Create",
+        null,
+        new { @class = "btn btn-primary" })
+
+    @Html.ActionLink(
+        "Xem trang bán hàng",
+        "Index",
+        "Trangchu",
+        null,
+        new { @class = "btn btn-outline-secondary" })
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MASANPHAM</td>
+
+                    <td>
+                        @if (!string.IsNullOrWhiteSpace(item.HINHANH))
+                        {
+                            <img src="@Url.Content("~/images/" + item.HINHANH)"
+                                 alt="@item.TENSANPHAM"
+                                 style="width:80px;height:80px;object-fit:contain;" />
+                        }
+                        else
+                        {
+                            <span>Chưa có ảnh</span>
+                        }
+                    </td>
+
+                    <td>@item.TENSANPHAM</td>
+
+                    <td>
+                        @(item.tbDANHMUC != null
+                            ? item.tbDANHMUC.TENDANHMUC
+                            : "Chưa có danh mục")
+                    </td>
+
+                    <td>
+                        @(item.DONGIA.HasValue
+                            ? item.DONGIA.Value.ToString("N0")
+                            : "")
+                    </td>
+
+                    <td>
+                        @(item.SOLUONG.HasValue
+                            ? item.SOLUONG.Value.ToString("N0")
+                            : "")
+                    </td>
+
+                    <td>
+                        <div class="d-flex flex-wrap gap-1">
+                            @Html.ActionLink(
+                                "Chi tiết",
+                                "Details",
+                                "QUANLYSANPHAM",
+                                new { id = item.MASANPHAM },
+                                new { @class = "btn btn-sm btn-info" })
+
+                            @Html.ActionLink(
+                                "Sửa",
+                                "Edit",
+                                "QUANLYSANPHAM",
+                                new { id = item.MASANPHAM },
+                                new { @class = "btn btn-sm btn-warning" })
+
+                            @Html.ActionLink(
+                                "Xóa",
+                                "Delete",
+                                "QUANLYSANPHAM",
+                                new { id = item.MASANPHAM },
+                                new { @class = "btn btn-sm btn-danger" })
+
+                            @Html.ActionLink(
+                                "Xem trên website",
+                                "Details",
+                                "Trangchu",
+                                new { id = item.MASANPHAM },
+                                new { @class = "btn btn-sm btn-outline-primary" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

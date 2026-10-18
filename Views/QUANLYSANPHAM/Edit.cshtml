@@ -1,0 +1,175 @@
+﻿@model QUANLYBANHANG_MVC.Models.SanPhamEditViewModel
+
+@{
+    ViewBag.Title = "Sửa sản phẩm";
+}
+
+<h2>Sửa sản phẩm</h2>
+
+<p>Mã sản phẩm: @Model.MASANPHAM</p>
+
+@using (Html.BeginForm(
+    "Edit",
+    "QUANLYSANPHAM",
+    new { id = Model.MASANPHAM },
+    FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.MASANPHAM)
+
+    @Html.ValidationSummary(
+        false,
+        "",
+        new { @class = "text-danger" })
+
+    <div class="mb-3">
+        @Html.LabelFor(
+            m => m.TENSANPHAM,
+            new { @class = "form-label" })
+
+        @Html.TextBoxFor(
+            m => m.TENSANPHAM,
+            new
+            {
+                @class = "form-control",
+                maxlength = "200"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.TENSANPHAM,
+            "",
+            new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(
+            m => m.DONGIA,
+            new { @class = "form-label" })
+
+        @Html.TextBoxFor(
+            m => m.DONGIA,
+            "{0:0}",
+            new
+            {
+                @class = "form-control",
+                type = "number",
+                min = "0",
+                step = "1"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.DONGIA,
+            "",
+            new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(
+            m => m.SOLUONG,
+            new { @class = "form-label" })
+
+        @Html.TextBoxFor(
+            m => m.SOLUONG,
+            "{0:0}",
+            new
+            {
+                @class = "form-control",
+                type = "number",
+                min = "0",
+                step = "1"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.SOLUONG,
+            "",
+            new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(
+            m => m.MADANHMUC,
+            new { @class = "form-label" })
+
+        @Html.DropDownListFor(
+            m => m.MADANHMUC,
+            (System.Collections.Generic.IEnumerable<SelectListItem>)
+                ViewBag.DanhMucOptions,
+            "-- Chọn danh mục --",
+            new { @class = "form-select" })
+
+        @Html.ValidationMessageFor(
+            m => m.MADANHMUC,
+            "",
+            new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ảnh hiện tại</label>
+
+        <div>
+            @if (!string.IsNullOrWhiteSpace(Model.HinhAnhHienTai))
+            {
+                <img src="@Url.Content("~/images/" + Model.HinhAnhHienTai)"
+                     alt="@Model.TENSANPHAM"
+                     style="width:160px;height:160px;object-fit:contain;" />
+            }
+            else
+            {
+                <span>Chưa có ảnh.</span>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(
+            m => m.AnhSanPham,
+            new { @class = "form-label" })
+
+        <input type="file"
+               id="AnhSanPham"
+               name="AnhSanPham"
+               class="form-control"
+               accept=".jpg,.jpeg,.png" />
+
+        <div class="form-text">
+            Không chọn ảnh mới nếu muốn giữ ảnh hiện tại.
+            Chấp nhận JPEG hoặc PNG, tối đa 2 MB và 4096 x 4096 pixel.
+            Nếu gửi form bị lỗi, hãy chọn lại ảnh mới.
+        </div>
+
+        @Html.ValidationMessageFor(
+            m => m.AnhSanPham,
+            "",
+            new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(
+            m => m.MOTA,
+            new { @class = "form-label" })
+
+        @Html.TextAreaFor(
+            m => m.MOTA,
+            new
+            {
+                @class = "form-control",
+                rows = "5"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.MOTA,
+            "",
+            new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Lưu thay đổi
+    </button>
+
+    @Html.ActionLink(
+        "Hủy",
+        "Index",
+        null,
+        new { @class = "btn btn-secondary" })
+}

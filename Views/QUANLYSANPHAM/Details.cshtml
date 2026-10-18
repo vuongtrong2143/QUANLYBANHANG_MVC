@@ -1,0 +1,80 @@
+﻿@model QUANLYBANHANG_MVC.tbSANPHAM
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        @if (!string.IsNullOrWhiteSpace(Model.HINHANH))
+        {
+            <img src="@Url.Content("~/images/" + Model.HINHANH)"
+                 alt="@Model.TENSANPHAM"
+                 class="img-fluid"
+                 style="max-height:320px;object-fit:contain;" />
+        }
+        else
+        {
+            <div class="alert alert-secondary">
+                Sản phẩm chưa có ảnh.
+            </div>
+        }
+    </div>
+
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-3">Mã sản phẩm</dt>
+            <dd class="col-sm-9">@Model.MASANPHAM</dd>
+
+            <dt class="col-sm-3">Tên sản phẩm</dt>
+            <dd class="col-sm-9">@Model.TENSANPHAM</dd>
+
+            <dt class="col-sm-3">Danh mục</dt>
+            <dd class="col-sm-9">
+                @(Model.tbDANHMUC != null
+                    ? Model.tbDANHMUC.TENDANHMUC
+                    : "Chưa có danh mục")
+            </dd>
+
+            <dt class="col-sm-3">Đơn giá</dt>
+            <dd class="col-sm-9">
+                @(Model.DONGIA.HasValue
+                    ? Model.DONGIA.Value.ToString("N0")
+                    : "Chưa có")
+            </dd>
+
+            <dt class="col-sm-3">Số lượng</dt>
+            <dd class="col-sm-9">
+                @(Model.SOLUONG.HasValue
+                    ? Model.SOLUONG.Value.ToString("N0")
+                    : "Chưa có")
+            </dd>
+
+            <dt class="col-sm-3">Mô tả</dt>
+            <dd class="col-sm-9" style="white-space:pre-wrap;">@Model.MOTA</dd>
+        </dl>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink(
+        "Sửa",
+        "Edit",
+        new { id = Model.MASANPHAM },
+        new { @class = "btn btn-warning" })
+
+    @Html.ActionLink(
+        "Xóa",
+        "Delete",
+        new { id = Model.MASANPHAM },
+        new { @class = "btn btn-danger" })
+
+    @Html.ActionLink(
+        "Quay lại danh sách",
+        "Index",
+        null,
+        new { @class = "btn btn-secondary" })
+</p>
